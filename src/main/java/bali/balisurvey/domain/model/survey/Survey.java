@@ -1,4 +1,4 @@
-package bali.balisurvey.domain;
+package bali.balisurvey.domain.model.survey;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
