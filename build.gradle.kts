@@ -2,6 +2,9 @@ plugins {
     java
     id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
+
+    // Checkstyle plugin
+    checkstyle
 }
 
 group = "bali"
@@ -35,4 +38,22 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+// Checkstyle configuration
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType<Checkstyle> {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
+checkstyle {
+    maxWarnings = 0
+    configFile = file("checkstyle/naver-checkstyle-rules.xml")
+    configProperties = mapOf("suppressionFile" to "checkstyle/naver-checkstyle-suppressions.xml")
 }

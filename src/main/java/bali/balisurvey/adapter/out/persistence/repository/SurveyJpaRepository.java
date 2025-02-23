@@ -1,8 +1,7 @@
 package bali.balisurvey.adapter.out.persistence.repository;
 
+import bali.balisurvey.domain.model.survey.Survey;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface SurveyJpaRepository extends JpaRepository {
+public interface SurveyJpaRepository extends JpaRepository<Survey, Long> {
 }
