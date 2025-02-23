@@ -1,21 +1,12 @@
 package bali.balisurvey.domain.model.survey;
 
-import jakarta.persistence.*;
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
-@Entity
 @Getter
-@DynamicInsert
-@DynamicUpdate
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table
+@AllArgsConstructor
 public class Survey {
-    @Id
-    @Column(name = "SEQ")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
+    private String title;
+    private String description;
 }

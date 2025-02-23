@@ -1,4 +1,8 @@
 package bali.balisurvey.adapter.in.dto.response;
 
-public record CreateSurveyResponse() {
+public record CreateSurveyResponse(
+        Long seq,
+        String title,
+        String description
+) {
 }
