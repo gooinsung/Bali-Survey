@@ -1,9 +1,12 @@
 package bali.balisurvey.application.port.in.dto;
 
-import lombok.Getter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-@Getter
-public class CreateSurveyCommand {
-    private String title;
-    private String description;
+public record CreateSurveyCommand(
+        @NotNull(message = "Title is required")
+        String title,
+        @NotBlank(message = "Description is required")
+        String description
+) {
 }

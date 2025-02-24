@@ -1,6 +1,6 @@
 package bali.balisurvey.adapter.out.persistence.adapter;
 
-import bali.balisurvey.adapter.out.mapper.SurveyMapper;
+import bali.balisurvey.adapter.mapper.SurveyMapper;
 import bali.balisurvey.adapter.out.persistence.entity.SurveyEntity;
 import bali.balisurvey.adapter.out.persistence.repository.SurveyJpaRepository;
 import bali.balisurvey.application.port.in.dto.CreateSurveyCommand;
@@ -17,7 +17,6 @@ public class SurveyPersistenceAdapter implements SurveyPersistencePort {
 
     @Override
     public Survey save(CreateSurveyCommand command) {
-        SurveyEntity surveyEntity = SurveyMapper.toEntity(command);
-        return SurveyMapper.toDomain(surveyJpaRepository.save(surveyEntity));
+        return SurveyMapper.toDomain(surveyJpaRepository.save(SurveyMapper.toEntity(command)));
     }
 }

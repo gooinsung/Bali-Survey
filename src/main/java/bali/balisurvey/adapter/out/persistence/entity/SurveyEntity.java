@@ -20,7 +20,6 @@ public class SurveyEntity {
     private Long seq;
 
     @Column(name = "TITLE", nullable = false, columnDefinition = "VARCHAR(255)")
-    @ColumnDefault("title")
     private String title;
 
     @Column(name = "DESCRIPTION", nullable = false, columnDefinition = "TEXT")
