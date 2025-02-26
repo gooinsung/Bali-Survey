@@ -1,6 +1,5 @@
 package bali.balisurvey.adapter.in.web.survey;
 
-import bali.balisurvey.adapter.mapper.SurveyMapper;
 import bali.balisurvey.application.port.in.dto.CreateSurveyCommand;
 import bali.balisurvey.application.port.in.dto.CreateSurveyResult;
 import bali.balisurvey.application.service.SurveyService;
