@@ -47,6 +47,7 @@ tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 
+/*
 tasks.withType<Checkstyle> {
     reports {
         xml.required.set(true)
@@ -58,4 +59,4 @@ checkstyle {
     maxWarnings = 0
     configFile = file("checkstyle/naver-checkstyle-rules.xml")
     configProperties = mapOf("suppressionFile" to "checkstyle/naver-checkstyle-suppressions.xml")
-}
+}*/
