@@ -3,7 +3,6 @@ package bali.balisurvey.adapter.out.persistence.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -12,8 +11,8 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
-@Table
-public class SurveyEntity {
+@Table(name = "SURVEY")
+public class SurveyEntity extends BaseEntity {
     @Id
     @Column(name = "SEQ")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
