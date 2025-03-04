@@ -1,5 +1,6 @@
-package bali.balisurvey.adapter.out.persistence.entity;
+package bali.balisurvey.adapter.out.persistence.survey.entity;
 
+import bali.balisurvey.adapter.out.persistence.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

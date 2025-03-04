@@ -1,4 +1,4 @@
-package bali.balisurvey.application.port.in.dto;
+package bali.balisurvey.application.port.in.survey.dto.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,0 +1,4 @@
+jwt:
+  expiration-time: 86400000
+  refresh-expiration-time: 86400000
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa

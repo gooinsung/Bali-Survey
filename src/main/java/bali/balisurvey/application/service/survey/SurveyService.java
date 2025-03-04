@@ -1,9 +1,9 @@
-package bali.balisurvey.application.service;
+package bali.balisurvey.application.service.survey;
 
-import bali.balisurvey.application.port.in.dto.CreateSurveyCommand;
-import bali.balisurvey.application.port.in.dto.CreateSurveyResult;
-import bali.balisurvey.application.port.in.usecase.CreateSurveyUseCase;
-import bali.balisurvey.application.port.out.SurveyPersistencePort;
+import bali.balisurvey.application.port.in.survey.dto.command.CreateSurveyCommand;
+import bali.balisurvey.application.port.in.survey.dto.result.CreateSurveyResult;
+import bali.balisurvey.application.port.in.survey.usercase.CreateSurveyUseCase;
+import bali.balisurvey.application.port.out.survey.SurveyPersistencePort;
 import bali.balisurvey.domain.model.survey.Survey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SurveyService implements CreateSurveyUseCase {
+
     private final SurveyPersistencePort surveyPersistencePort;
 
     @Override
