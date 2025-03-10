@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class SignUpResult {
+
     private Long seq;
     private String userId;
     private String name;

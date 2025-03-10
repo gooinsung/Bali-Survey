@@ -24,4 +24,9 @@ public class UserPersistenceAdapter implements UserPersistencePort {
                 UserRole.NORMAL_USER.getRole()));
         return userMapper.toDomain(entity);
     }
+
+    @Override
+    public Boolean isUserExist(String userId) {
+        return userJpaRepository.existsByUserId(userId);
+    }
 }

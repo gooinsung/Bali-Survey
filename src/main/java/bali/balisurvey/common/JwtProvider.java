@@ -15,7 +15,7 @@ public class JwtProvider {
     private final long expiration;
     private final long refreshExpiration;
 
-    public JwtProvider(@Value("${jwt.secret}")String secretKey,
+    public JwtProvider(@Value("${jwt.secret}") String secretKey,
         @Value("${jwt.expiration-time}") long expiration,
         @Value("${jwt.refresh-expiration-time}") long refreshExpiration) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
