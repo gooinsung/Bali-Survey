@@ -1,18 +1,63 @@
 package bali.balisurvey.common.config;
 
+import bali.balisurvey.common.auth.jwt.JwtUtils;
+import bali.balisurvey.common.auth.service.CustomUserDetailService;
+import bali.balisurvey.common.filter.JwtAuthFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig {
 
+    private static final String[] WHITE_LIST = {
+        "/api/v1/user/**"
+    };
+
+    private final CustomUserDetailService customUserDetailService;
+    private final JwtUtils jwtUtils;
+
+
+    // todo: 성공 핸들러, 예외 핸들러 생성 밀 추가 해야 함
     @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        // CSRF, CORS
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(Customizer.withDefaults());
+
+        // 세션 stateless
+        http.sessionManagement(sessionManagement -> sessionManagement
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        // formLogin BasicHttp 비활성화
+        http.formLogin(AbstractHttpConfigurer::disable);
+        http.httpBasic(AbstractHttpConfigurer::disable);
+
+        // JwtAuthFilter 추가
+        http.addFilterBefore(new JwtAuthFilter(customUserDetailService, jwtUtils),
+            UsernamePasswordAuthenticationFilter.class);
+
+        http.authorizeHttpRequests(authorizeRequests ->
+            authorizeRequests
+                .requestMatchers(WHITE_LIST).permitAll()
+                .anyRequest().authenticated()
+        );
+
+        return http.build();
+    }
+
+    /* security 무효화 설정 */
+    /*@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests.anyRequest().permitAll()
@@ -20,5 +65,5 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable());
 
         return http.build();
-    }
+    }*/
 }

@@ -1,35 +1,37 @@
 package bali.balisurvey.common.auth.domain;
 
-import io.jsonwebtoken.Claims;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
+@RequiredArgsConstructor
 public class Auth implements UserDetails {
 
-    private String userId;
-    private Long userSeq;
-
-    public Auth(Claims claims) {
-        this.userId = claims.get("userId", String.class);
-        this.userSeq = claims.get("userSeq", Long.class);
-    }
-
+    private final UserInfo userInfo;
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        List<String> roles = new ArrayList<>();
+        roles.add(userInfo.getRole());
+        return roles.stream()
+            .map(SimpleGrantedAuthority::new)
+            .collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-        return "";
+        return userInfo.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return userInfo.getUserId();
     }
 }

@@ -28,4 +28,5 @@ public class UserController {
         return ResponseEntity.ok(new SignUpResponse(signUpUserCase.signUp(command)));
     }
 
+
 }

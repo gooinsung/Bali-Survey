@@ -8,4 +8,6 @@ public interface UserPersistencePort {
     User save(SignUpCommand command);
 
     Boolean isUserExist(String userId);
+
+    User findByUserId(String userId);
 }

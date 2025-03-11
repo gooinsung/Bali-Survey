@@ -1,12 +1,13 @@
-package bali.balisurvey.common.auth.provider;
+package bali.balisurvey.common.auth.jwt;
 
-import bali.balisurvey.common.auth.domain.Auth;
 import bali.balisurvey.common.auth.dto.command.CreateJwtCommand;
 import bali.balisurvey.common.auth.dto.result.TokenResult;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
@@ -18,13 +19,13 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class JwtProvider {
+public class JwtUtils {
 
     private final Key key;
     private final long expiration;
     private final long refreshExpiration;
 
-    public JwtProvider(@Value("${jwt.secret}") String secretKey,
+    public JwtUtils(@Value("${jwt.secret}") String secretKey,
         @Value("${jwt.expiration-time}") long expiration,
         @Value("${jwt.refresh-expiration-time}") long refreshExpiration) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
@@ -55,9 +56,8 @@ public class JwtProvider {
 
     }
 
-    public Auth getAuth(String accessToken) {
-        Claims claims = parseClaims(accessToken);
-        return new Auth(claims);
+    public String getUserId(String accessToken) {
+        return parseClaims(accessToken).get("userId", String.class);
     }
 
     public Claims parseClaims(String accessToken) {
@@ -71,6 +71,22 @@ public class JwtProvider {
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }
+    }
+
+    public Boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return Boolean.TRUE;
+        } catch (SecurityException | MalformedJwtException e) {
+            log.info("Invalid JWT Token", e);
+        } catch (ExpiredJwtException e) {
+            log.info("Expired JWT Token", e);
+        } catch (UnsupportedJwtException e) {
+            log.info("Unsupported JWT Token", e);
+        } catch (IllegalArgumentException e) {
+            log.info("JWT claims string is empty.", e);
+        }
+        return false;
     }
 
 
