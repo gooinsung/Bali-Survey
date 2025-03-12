@@ -3,7 +3,7 @@ package bali.balisurvey.adapter.in.web.survey;
 import bali.balisurvey.adapter.in.web.dto.request.CreateSurveyRequest;
 import bali.balisurvey.adapter.in.web.dto.response.CreateSurveyResponse;
 import bali.balisurvey.application.port.in.survey.dto.command.CreateSurveyCommand;
-import bali.balisurvey.application.service.survey.SurveyService;
+import bali.balisurvey.application.port.in.survey.usercase.CreateSurveyUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SurveyController {
 
-    private final SurveyService service;
+    private final CreateSurveyUseCase createSurvey;
 
     @PostMapping
     public ResponseEntity<CreateSurveyResponse> createSurvey(
         @RequestBody @Valid CreateSurveyRequest request) {
         CreateSurveyCommand command = new CreateSurveyCommand(request.title(),
             request.description());
-        return ResponseEntity.ok(new CreateSurveyResponse(service.createSurvey(command)));
+        return ResponseEntity.ok(new CreateSurveyResponse(createSurvey.createSurvey(command)));
     }
 
 }
