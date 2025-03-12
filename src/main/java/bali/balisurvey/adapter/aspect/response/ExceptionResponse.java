@@ -6,8 +6,10 @@ import lombok.Getter;
 public class ExceptionResponse {
 
     private String message;
+    private String code;
 
-    public ExceptionResponse(String message) {
+    public ExceptionResponse(String message, String code) {
         this.message = message;
+        this.code = code;
     }
 }

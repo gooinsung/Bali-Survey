@@ -9,5 +9,4 @@ public interface UserPersistencePort {
 
     Boolean isUserExist(String userId);
 
-    User findByUserId(String userId);
 }

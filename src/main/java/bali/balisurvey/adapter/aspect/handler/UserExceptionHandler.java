@@ -12,6 +12,6 @@ public class UserExceptionHandler {
     @ExceptionHandler(UserException.class)
     public ResponseEntity<ExceptionResponse> handleUserException(UserException e) {
         return ResponseEntity.status(e.getType().getStatus())
-            .body(new ExceptionResponse(e.getType().getMessage()));
+            .body(new ExceptionResponse(e.getType().getMessage(), e.getType().getCode()));
     }
 }

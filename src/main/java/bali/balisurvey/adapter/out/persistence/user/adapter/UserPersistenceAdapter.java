@@ -5,8 +5,6 @@ import bali.balisurvey.adapter.out.persistence.user.repository.UserJpaRepository
 import bali.balisurvey.application.mapper.user.UserMapper;
 import bali.balisurvey.application.port.in.user.dto.command.SignUpCommand;
 import bali.balisurvey.application.port.out.user.UserPersistencePort;
-import bali.balisurvey.application.service.user.exception.UserException;
-import bali.balisurvey.application.service.user.exception.enums.UserExceptionType;
 import bali.balisurvey.domain.enums.user.UserRole;
 import bali.balisurvey.domain.model.user.User;
 import lombok.RequiredArgsConstructor;
@@ -32,10 +30,4 @@ public class UserPersistenceAdapter implements UserPersistencePort {
         return userJpaRepository.existsByUserId(userId);
     }
 
-    @Override
-    public User findByUserId(String userId) {
-        UserEntity entity = userJpaRepository.findByUserId(userId)
-            .orElseThrow(() -> new UserException(UserExceptionType.NOT_FOUND));
-        return userMapper.toDomain(entity);
-    }
 }
