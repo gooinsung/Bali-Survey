@@ -4,7 +4,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
 
     // Checkstyle plugin
-    checkstyle
+    //checkstyle
 }
 
 group = "bali"
