@@ -1,4 +1,4 @@
-package bali.balisurvey.adapter.aspect.response;
+package bali.balisurvey.common.response.exception;
 
 import lombok.Getter;
 

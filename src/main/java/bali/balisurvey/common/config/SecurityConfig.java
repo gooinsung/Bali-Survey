@@ -1,5 +1,7 @@
 package bali.balisurvey.common.config;
 
+import bali.balisurvey.common.auth.handler.JwtAccessDeniedHandler;
+import bali.balisurvey.common.auth.handler.JwtAuthenticationEntryPoint;
 import bali.balisurvey.common.auth.jwt.JwtUtils;
 import bali.balisurvey.common.auth.service.CustomUserDetailService;
 import bali.balisurvey.common.filter.JwtAuthFilter;
@@ -23,11 +25,13 @@ public class SecurityConfig {
         "/api/v1/user/**"
     };
 
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     private final CustomUserDetailService customUserDetailService;
     private final JwtUtils jwtUtils;
 
 
-    // todo: 성공 핸들러, 예외 핸들러 생성 밀 추가 해야 함
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -45,7 +49,11 @@ public class SecurityConfig {
 
         // JwtAuthFilter 추가
         http.addFilterBefore(new JwtAuthFilter(customUserDetailService, jwtUtils),
-            UsernamePasswordAuthenticationFilter.class);
+                UsernamePasswordAuthenticationFilter.class)
+            .exceptionHandling(exceptionHandling -> {
+                exceptionHandling.accessDeniedHandler(jwtAccessDeniedHandler);
+                exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint);
+            });
 
         http.authorizeHttpRequests(authorizeRequests ->
             authorizeRequests

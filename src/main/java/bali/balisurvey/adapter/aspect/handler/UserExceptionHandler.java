@@ -1,7 +1,7 @@
 package bali.balisurvey.adapter.aspect.handler;
 
-import bali.balisurvey.adapter.aspect.response.ExceptionResponse;
 import bali.balisurvey.application.service.user.exception.UserException;
+import bali.balisurvey.common.response.exception.ExceptionResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
