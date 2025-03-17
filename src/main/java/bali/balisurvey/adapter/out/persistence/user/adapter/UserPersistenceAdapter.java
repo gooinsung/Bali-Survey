@@ -19,9 +19,9 @@ public class UserPersistenceAdapter implements UserPersistencePort {
 
     @Override
     public User save(SignUpCommand command) {
-        UserEntity entity = userJpaRepository.save(
-            new UserEntity(command.getUserId(), command.getPassword(), command.getName(),
-                UserRole.NORMAL_USER.getRole()));
+        UserEntity entity = userJpaRepository.save(UserEntity.toEntity(
+            command.getUserId(), command.getPassword(), command.getName(),
+            UserRole.NORMAL_USER.getRole()));
         return userMapper.toDomain(entity);
     }
 

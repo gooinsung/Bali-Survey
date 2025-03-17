@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
@@ -16,7 +17,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Getter
 @DynamicInsert
 @DynamicUpdate
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "SURVEY")
 public class SurveyEntity extends BaseEntity {
 
@@ -31,8 +32,10 @@ public class SurveyEntity extends BaseEntity {
     @Column(name = "DESCRIPTION", nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    public SurveyEntity(String title, String description) {
-        this.title = title;
-        this.description = description;
+    public static SurveyEntity toEntity(String title, String description) {
+        SurveyEntity entity = new SurveyEntity();
+        entity.title = title;
+        entity.description = description;
+        return entity;
     }
 }

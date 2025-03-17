@@ -19,7 +19,7 @@ public class SurveyPersistenceAdapter implements SurveyPersistencePort {
     @Override
     public Survey save(CreateSurveyCommand command) {
         SurveyEntity entity = surveyJpaRepository.save(
-            new SurveyEntity(command.getTitle(), command.getDescription()));
+            SurveyEntity.toEntity(command.getTitle(), command.getDescription()));
         return surveyMapper.toDomain(entity);
     }
 }

@@ -1,13 +1,13 @@
 package bali.balisurvey.adapter.out.persistence.user.entity;
 
 import bali.balisurvey.adapter.out.persistence.entity.BaseEntity;
-import bali.balisurvey.domain.enums.user.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
@@ -17,7 +17,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Getter
 @DynamicInsert
 @DynamicUpdate
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "USER")
 public class UserEntity extends BaseEntity {
 
@@ -38,11 +38,14 @@ public class UserEntity extends BaseEntity {
     @Column(name = "ROLE", nullable = false, length = 50, columnDefinition = "VARCHAR(50)")
     private String role;
 
-    public UserEntity(String userId, String password, String name, String role) {
-        this.userId = userId;
-        this.password = password;
-        this.name = name;
-        this.role = role == null ? UserRole.NORMAL_USER.getRole() : role;
+
+    public static UserEntity toEntity(String userId, String password, String name, String role) {
+        UserEntity entity = new UserEntity();
+        entity.userId = userId;
+        entity.password = password;
+        entity.name = name;
+        entity.role = role;
+        return entity;
     }
 
 }
