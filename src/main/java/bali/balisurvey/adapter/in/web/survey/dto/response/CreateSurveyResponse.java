@@ -1,4 +1,4 @@
-package bali.balisurvey.adapter.in.web.dto.response;
+package bali.balisurvey.adapter.in.web.survey.dto.response;
 
 import bali.balisurvey.application.port.in.survey.dto.result.CreateSurveyResult;
 import lombok.AllArgsConstructor;

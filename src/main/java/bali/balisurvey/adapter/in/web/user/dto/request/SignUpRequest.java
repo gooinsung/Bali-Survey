@@ -1,4 +1,4 @@
-package bali.balisurvey.adapter.in.web.dto.request;
+package bali.balisurvey.adapter.in.web.user.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 

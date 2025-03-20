@@ -1,7 +1,7 @@
 package bali.balisurvey.adapter.in.web.survey;
 
-import bali.balisurvey.adapter.in.web.dto.request.CreateSurveyRequest;
-import bali.balisurvey.adapter.in.web.dto.response.CreateSurveyResponse;
+import bali.balisurvey.adapter.in.web.survey.dto.request.CreateSurveyRequest;
+import bali.balisurvey.adapter.in.web.survey.dto.response.CreateSurveyResponse;
 import bali.balisurvey.application.port.in.survey.dto.command.CreateSurveyCommand;
 import bali.balisurvey.application.port.in.survey.usercase.CreateSurveyUseCase;
 import jakarta.validation.Valid;

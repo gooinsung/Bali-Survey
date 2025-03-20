@@ -1,8 +1,8 @@
 package bali.balisurvey.adapter.in.web.user;
 
 
-import bali.balisurvey.adapter.in.web.dto.request.SignUpRequest;
-import bali.balisurvey.adapter.in.web.dto.response.SignUpResponse;
+import bali.balisurvey.adapter.in.web.user.dto.request.SignUpRequest;
+import bali.balisurvey.adapter.in.web.user.dto.response.SignUpResponse;
 import bali.balisurvey.application.port.in.user.dto.command.SignUpCommand;
 import bali.balisurvey.application.port.in.user.usecase.SignUpUserCase;
 import jakarta.validation.Valid;
