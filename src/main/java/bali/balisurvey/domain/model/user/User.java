@@ -10,12 +10,15 @@ public class User {
     private String password;
     private String name;
     private String role;
+    private Boolean isDeleted;
 
-    public User(Long seq, String userId, String password, String name, String role) {
+    public User(Long seq, String userId, String password, String name, String role,
+        Boolean isDeleted) {
         this.seq = seq;
         this.userId = userId;
         this.password = password;
         this.name = name;
         this.role = role;
+        this.isDeleted = isDeleted;
     }
 }

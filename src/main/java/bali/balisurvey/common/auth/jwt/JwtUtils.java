@@ -1,7 +1,7 @@
 package bali.balisurvey.common.auth.jwt;
 
 import bali.balisurvey.common.auth.dto.command.CreateJwtCommand;
-import bali.balisurvey.common.auth.dto.result.TokenResult;
+import bali.balisurvey.common.auth.dto.result.CreateTokenResult;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -34,7 +34,7 @@ public class JwtUtils {
         this.refreshExpiration = refreshExpiration;
     }
 
-    public TokenResult createToken(CreateJwtCommand command) {
+    public CreateTokenResult createToken(CreateJwtCommand command) {
         Claims claims = Jwts.claims();
         claims.put("userSeq", command.userSeq());
         claims.put("userId", command.userId());
@@ -52,7 +52,7 @@ public class JwtUtils {
             .signWith(key, SignatureAlgorithm.HS256)
             .compact();
 
-        return new TokenResult(accessToken);
+        return new CreateTokenResult(accessToken);
 
     }
 

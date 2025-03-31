@@ -1,9 +1,13 @@
 package bali.balisurvey.adapter.in.web.user;
 
 
+import bali.balisurvey.adapter.in.web.user.dto.request.SignInRequest;
 import bali.balisurvey.adapter.in.web.user.dto.request.SignUpRequest;
+import bali.balisurvey.adapter.in.web.user.dto.response.SignInResponse;
 import bali.balisurvey.adapter.in.web.user.dto.response.SignUpResponse;
+import bali.balisurvey.application.port.in.user.dto.command.SignInCommand;
 import bali.balisurvey.application.port.in.user.dto.command.SignUpCommand;
+import bali.balisurvey.application.port.in.user.usecase.SignInUseCase;
 import bali.balisurvey.application.port.in.user.usecase.SignUpUserCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final SignUpUserCase signUpUserCase;
+    private final SignInUseCase signInUseCase;
 
     @PostMapping
     public ResponseEntity<SignUpResponse> signUp(
@@ -28,5 +33,11 @@ public class UserController {
         return ResponseEntity.ok(new SignUpResponse(signUpUserCase.signUp(command)));
     }
 
-
+    @PostMapping("/sign-in")
+    public ResponseEntity<SignInResponse> login(@Valid @RequestBody SignInRequest request) {
+        SignInCommand command = new SignInCommand(request.userId(), request.password());
+        return ResponseEntity.ok(new SignInResponse(signInUseCase.signIn(command)));
+    }
 }
+
+

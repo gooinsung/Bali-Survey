@@ -3,8 +3,11 @@ package bali.balisurvey.adapter.out.persistence.user.adapter;
 import bali.balisurvey.adapter.out.persistence.user.entity.UserEntity;
 import bali.balisurvey.adapter.out.persistence.user.repository.UserJpaRepository;
 import bali.balisurvey.application.mapper.user.UserMapper;
+import bali.balisurvey.application.port.in.user.dto.command.SignInCommand;
 import bali.balisurvey.application.port.in.user.dto.command.SignUpCommand;
 import bali.balisurvey.application.port.out.user.UserPersistencePort;
+import bali.balisurvey.application.service.user.exception.UserException;
+import bali.balisurvey.application.service.user.exception.enums.UserExceptionType;
 import bali.balisurvey.domain.enums.user.UserRole;
 import bali.balisurvey.domain.model.user.User;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +31,12 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     @Override
     public Boolean isUserExist(String userId) {
         return userJpaRepository.existsByUserId(userId);
+    }
+
+    @Override
+    public User findByUserId(SignInCommand command) {
+        return userMapper.toDomain(userJpaRepository.findByUserId(command.getUserId())
+            .orElseThrow(() -> new UserException(UserExceptionType.NOT_FOUND)));
     }
 
 }

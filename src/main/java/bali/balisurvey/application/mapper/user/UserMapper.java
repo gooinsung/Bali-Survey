@@ -9,6 +9,6 @@ public class UserMapper {
 
     public User toDomain(UserEntity entity) {
         return new User(entity.getUserSeq(), entity.getUserId(), entity.getPassword(),
-            entity.getName(), entity.getRole());
+            entity.getName(), entity.getRole(), entity.getIsDeleted());
     }
 }
