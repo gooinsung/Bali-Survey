@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 public class SurveyMapper {
 
     public Survey toDomain(SurveyEntity entity) {
-        return new Survey(entity.getSeq(), entity.getTitle(), entity.getDescription());
+        return Survey
+            .builder()
+            .seq(entity.getSeq())
+            .title(entity.getTitle())
+            .description(entity.getDescription())
+            .build();
     }
 }
